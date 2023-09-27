@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+
+    
+   
+class Parent extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        isUserLoggedIn: true, 
+        users: [
+          {
+            name: 'Nika',
+            age: 25,
+            id: 1,
+          },
+          {
+            name: 'Lasha',
+            age: 30,
+            id: 2,
+          },
+          {
+            name: 'Mari',
+            age: 28,
+            id: 3,
+          },
+        ], 
+      };
+    }
+
+    render() {
+      return (
+        <div>
+          <h1>Parent Component</h1>
+          <Child
+            users={this.state.users}
+            isUserLoggedIn={this.state.isUserLoggedIn}
+          />
+        </div>
+      );
+    }
+  }
+
+  class Child extends React.Component {
+    render() {
+      const { users, isUserLoggedIn } = this.props;
+
+      return (
+        <div>
+          <h2>Child Component</h2>
+          {isUserLoggedIn ? (
+            <ul>
+              {users.length > 0 ? (
+                users.map((user) => (
+                  <li key={user.id}>
+                    Name: {user.name}, Age: {user.age}, ID: {user.id}
+                  </li>
+                ))
+              ) : (
+                <div>no users in the system</div>
+              )}
+            </ul>
+          ) : (
+            <div>you are not authorized to see the user list</div>
+          )}
+        </div>
+      );
+    }
+  }
+
+  ReactDOM.render(<Parent />, document.getElementById('root'));
+
+
+
+
+
+
+
+
+
+    </script>
+
+<script>
+    import React from 'react';
+
+// Navbar კომპონენტი
+function Navbar() {
+  return <div>This is the Navbar</div>;
+}
+
+// Footer კომპონენტი
+function Footer() {
+  return <div>This is the Footer</div>;
+}
+
+// Wrapper კომპონენტი
+function Wrapper({ children }) {
+  return (
+    <div>
+      <Navbar />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+
+// აპლიკაციის მთავარ კომპონენტი
+function App() {
+  return (
+    <Wrapper>
+      <h1>Welcome to My App</h1>
+      <p>This is the content of my app.</p>
+    </Wrapper>
+  );
+}
+
+export default App;
+
+</script>
+</body>
+</html>
